@@ -1,4 +1,4 @@
-# Borderless — Atlas des mobilités (D3.js)
+vscode_lsp_terminal_prompt_tracker= {}.js)
 
 Application web interactive de visualisation d'information : **visas, connectivité aérienne historique et contexte géopolitique**. Projet en HTML, CSS et **D3.js v7**, sans framework ni serveur backend.
 
@@ -19,8 +19,8 @@ Application web interactive de visualisation d'information : **visas, connectivi
 Pour télécharger les données dans `data/` en amont (facultatif) :
 
 ```bash
-python3 scripts/download_data.py
-python3 -m http.server 8000
+python scripts/download_data.py
+python -m http.server 8000
 ```
 
 Le site utilise d'abord les fichiers locaux s'ils existent, sinon les sources en ligne. Le téléchargement préalable est utile pour la stabilité pendant une présentation. Le CDN D3.js et les polices Google restent chargés en ligne.
