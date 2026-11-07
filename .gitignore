@@ -1,0 +1,4 @@
+# Fichiers bruts : regeneres par 'make data'
+data/*.dat
+data/*.geojson
+data/passport-index-tidy-iso2.csv

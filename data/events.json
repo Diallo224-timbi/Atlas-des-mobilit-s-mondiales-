@@ -1,0 +1,52 @@
+[
+  {
+    "id":"covid",
+    "date":"2020-03-11",
+    "category":"Crise sanitaire mondiale",
+    "title":"L'OMS qualifie la Covid-19 de pandémie",
+    "description":"La pandémie a été accompagnée de restrictions de déplacements dans de nombreux pays. Cet événement donne du contexte, sans décrire à lui seul les règles de visa.",
+    "countries":[],
+    "sourceName":"Organisation mondiale de la santé",
+    "sourceUrl":"https://www.who.int/fr/news-room/speeches/item/who-director-general-s-opening-remarks-at-the-media-briefing-on-covid-19---11-march-2020"
+  },
+  {
+    "id":"ukraine",
+    "date":"2022-02-24",
+    "category":"Conflit",
+    "title":"Invasion à grande échelle de l'Ukraine",
+    "description":"L'ONU décrit les opérations militaires russes sur le territoire ukrainien. À étudier comme contexte géopolitique, et non comme une mesure directe des changements de visas ou de vols.",
+    "countries":["UA","RU"],
+    "sourceName":"Nations unies",
+    "sourceUrl":"https://ukraine.un.org/en/173250-statement-secretary-general-%E2%80%93-ukraine"
+  },
+  {
+    "id":"kosovo",
+    "date":"2024-01-01",
+    "category":"Libéralisation de visa",
+    "title":"Exemption de visa UE pour les passeports kosovars",
+    "description":"Les titulaires d'un passeport du Kosovo peuvent effectuer des séjours de courte durée sans visa dans l'UE, suivant les conditions applicables.",
+    "countries":["XK","FR","DE","IT"],
+    "sourceName":"Commission européenne",
+    "sourceUrl":"https://home-affairs.ec.europa.eu/news/visa-free-travel-kosovo-citizens-eu-2024-01-03_en"
+  },
+  {
+    "id":"schengen",
+    "date":"2025-01-01",
+    "category":"Intégration régionale",
+    "title":"Bulgarie et Roumanie : intégration complète à Schengen",
+    "description":"Suppression des contrôles aux frontières terrestres intérieures ; les contrôles aériens et maritimes étaient déjà levés depuis mars 2024. Ce n'est pas une nouvelle catégorie de visa.",
+    "countries":["BG","RO"],
+    "sourceName":"Commission européenne",
+    "sourceUrl":"https://home-affairs.ec.europa.eu/news/bulgaria-and-romania-join-schengen-area-2025-01-03_en"
+  },
+  {
+    "id":"uketa",
+    "date":"2025-04-02",
+    "category":"Autorisation électronique",
+    "title":"ETA exigée pour de nombreux voyageurs européens au Royaume-Uni",
+    "description":"Entrée en application du dispositif ETA britannique à plusieurs nationalités européennes éligibles, sous réserve d'exceptions. Autorisation électronique ≠ visa classique.",
+    "countries":["GB","FR","DE","IT","ES"],
+    "sourceName":"GOV.UK — Immigration Rules Appendix ETA",
+    "sourceUrl":"https://www.gov.uk/guidance/immigration-rules/immigration-rules-appendix-electronic-travel-authorisation"
+  }
+]

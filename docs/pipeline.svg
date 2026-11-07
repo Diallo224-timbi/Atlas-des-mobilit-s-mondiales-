@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 580" font-family="DM Sans, Arial, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#516a86"/></marker>
+<style>.b{fill:#f3f8fc;stroke:#516a86;stroke-width:1.5;rx:10}.s{fill:#e5f7f1;stroke:#2f9f82;stroke-width:1.5;rx:10}.d{fill:#fff4e1;stroke:#c9962f;stroke-width:1.5;rx:10}.v{fill:#ece8fb;stroke:#7b64cf;stroke-width:1.5;rx:10}.t{font-size:14px;font-weight:700;fill:#13243a}.u{font-size:11.5px;fill:#44566d}.h{font-size:11px;font-weight:800;letter-spacing:1.5px;fill:#6a7d93}.l{stroke:#516a86;stroke-width:1.6;fill:none;marker-end:url(#a)}</style></defs>
+<rect width="1180" height="580" fill="#fff"/>
+<text x="30" y="34" class="h">1 · SOURCES BRUTES</text><text x="330" y="34" class="h">2 · SCRIPTS</text><text x="640" y="34" class="h">3 · DONNÉES TRAITÉES</text><text x="930" y="34" class="h">4 · APPLICATION D3.JS</text>
+<rect class="d" x="30" y="55" width="250" height="68"/><text x="45" y="82" class="t">Passport Index Data</text><text x="45" y="102" class="u">passport-index-tidy-iso2.csv · 2026</text>
+<rect class="d" x="30" y="145" width="250" height="68"/><text x="45" y="172" class="t">OpenFlights</text><text x="45" y="192" class="u">airports.dat + routes.dat · 2014</text>
+<rect class="d" x="30" y="235" width="250" height="68"/><text x="45" y="262" class="t">Natural Earth / geo-countries</text><text x="45" y="282" class="u">countries.geojson · contours + ISO-2</text>
+<rect class="d" x="30" y="325" width="250" height="68"/><text x="45" y="352" class="t">Données manuelles</text><text x="45" y="372" class="u">events.json · country-aliases.json</text>
+<rect class="s" x="330" y="55" width="260" height="75"/><text x="345" y="82" class="t">download_data.py</text><text x="345" y="102" class="u">Télécharge les fichiers publics</text><text x="345" y="118" class="u">vers data/</text>
+<rect class="s" x="330" y="155" width="260" height="75"/><text x="345" y="180" class="t">01_clean_visas.py</text><text x="345" y="200" class="u">Catégorise « Requirement » (8 classes)</text><text x="345" y="216" class="u">+ accès sans visa préalable oui/non</text>
+<rect class="s" x="330" y="255" width="260" height="85"/><text x="345" y="280" class="t">02_aggregate_routes.py</text><text x="345" y="300" class="u">Joint aéroports → pays (alias → ISO-2)</text><text x="345" y="316" class="u">Garde les routes directes internationales</text><text x="345" y="332" class="u">Agrège par couple de pays</text>
+<rect class="s" x="330" y="365" width="260" height="75"/><text x="345" y="390" class="t">03_compute_stats.py</text><text x="345" y="410" class="u">Score, visas requis, pays reliés</text><text x="345" y="426" class="u">Corrélation de Pearson</text>
+<rect class="b" x="330" y="465" width="260" height="55"/><text x="345" y="488" class="t">test-transformations.js</text><text x="345" y="506" class="u">Tests de la logique de transformation</text>
+<rect class="d" x="640" y="55" width="240" height="68"/><text x="655" y="82" class="t">visas_clean.csv</text><text x="655" y="102" class="u">39 601 couples passeport → destination</text>
+<rect class="d" x="640" y="145" width="240" height="68"/><text x="655" y="172" class="t">routes_by_country_pair.csv</text><text x="655" y="192" class="u">4 514 couples de pays reliés (2014)</text>
+<rect class="d" x="640" y="235" width="240" height="68"/><text x="655" y="262" class="t">country_stats.csv</text><text x="655" y="282" class="u">199 pays · indicateurs de mobilité</text>
+<rect class="v" x="930" y="55" width="220" height="405"/><text x="945" y="82" class="t">src/app.js (D3 v7)</text><text x="945" y="104" class="u">Chargement · jointures · états</text>
+<g class="u"><text x="945" y="150" class="t">Pour chaque visualisation :</text><text x="945" y="176" class="u">① Carte choroplèthe + arcs</text><text x="945" y="198" class="u">② Nuage de points + Pearson</text><text x="945" y="220" class="u">③ Top destinations (barres)</text><text x="945" y="242" class="u">④ Matrice / heatmap</text><text x="945" y="264" class="u">⑤ Frise chronologique</text><text x="945" y="286" class="u">⑥ Indicateurs clés (KPI)</text></g>
+<rect x="945" y="315" width="190" height="125" rx="8" fill="#fff" stroke="#7b64cf"/><text x="957" y="338" class="t" font-size="12">Interactions</text><text x="957" y="358" class="u">survol · clic · zoom · filtre</text><text x="957" y="376" class="u">comparaison de 2 passeports</text><text x="957" y="394" class="u">curseur d'années · export CSV</text><text x="957" y="418" class="u">→ voir DOCUMENTATION.md</text>
+<path class="l" d="M280 89H330"/><path class="l" d="M280 179L305 179L305 100L330 100"/><path class="l" d="M280 269L305 269L305 115L330 115"/>
+<path class="l" d="M460 130V155"/><path class="l" d="M460 230V255"/><path class="l" d="M460 340V365"/>
+<path class="l" stroke-dasharray="5 4" d="M280 359L305 359L305 300L330 300"/>
+<path class="l" d="M590 192L615 192L615 89L640 89"/><path class="l" d="M590 297L615 297L615 179L640 179"/><path class="l" d="M590 402L615 402L615 269L640 269"/>
+<path class="l" stroke-dasharray="5 4" d="M590 192L610 192L610 402L590 402" opacity="0"/>
+<path class="l" d="M880 89L905 89L905 140L930 140"/><path class="l" d="M880 179H930"/><path class="l" d="M880 269L905 269L905 220L930 220"/>
+<text x="30" y="545" class="u">Les fichiers manuels (events.json, country-aliases.json) alimentent directement le script de traitement et l'application.</text>
+<text x="30" y="563" class="u">Traits pleins : flux de données · Fond ocre : fichiers de données · Vert : scripts · Violet : application.</text>
+</svg>

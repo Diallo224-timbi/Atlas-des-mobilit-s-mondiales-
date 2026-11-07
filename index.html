@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="description" content="Atlas interactif D3.js : exigences de visa, connectivité aérienne historique et contexte géopolitique." />
+  <title>Borderless — Atlas des mobilités</title>
+  <link rel="stylesheet" href="src/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js" defer></script>
+  <script src="src/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">B<span>·</span></div><div><strong>BORDERLESS</strong><small>ATLAS DES MOBILITÉS</small></div></div>
+      <div class="sidebar-section-label">EXPLORER</div>
+      <nav class="side-nav" aria-label="Navigation principale">
+        <a class="nav-link active" href="#atlas"><span class="nav-icon">◈</span> Vue mondiale</a>
+        <a class="nav-link" href="#analysis"><span class="nav-icon">◉</span> Corrélations</a>
+        <a class="nav-link" href="#matrix"><span class="nav-icon">▦</span> Matrice visas</a>
+        <a class="nav-link" href="#timeline"><span class="nav-icon">◷</span> Géopolitique</a>
+      </nav>
+      <div class="divider"></div>
+      <div class="sidebar-section-label">PARAMÈTRES</div>
+      <label class="field-label" for="passportSelect">Passeport étudié</label>
+      <select id="passportSelect" class="input-select" aria-label="Pays du passeport"><option value="FR">France (FR)</option></select>
+      <label class="field-label" for="compareSelect">Comparer avec</label>
+      <select id="compareSelect" class="input-select" aria-label="Pays de comparaison"><option value="DZ">Algérie (DZ)</option></select>
+      <label class="field-label" for="visaFilter">Exigence à afficher</label>
+      <select id="visaFilter" class="input-select">
+        <option value="all">Toutes les catégories</option>
+        <option value="free">Sans visa</option>
+        <option value="arrival">Visa à l'arrivée</option>
+        <option value="eta">Autorisation électronique (ETA)</option>
+        <option value="evisa">Visa électronique</option>
+        <option value="required">Visa préalable</option>
+        <option value="blocked">Entrée interdite</option>
+      </select>
+      <div class="toggle-row"><label for="showRoutes">Afficher les liaisons</label><input type="checkbox" id="showRoutes" checked /></div>
+      <div class="toggle-row"><label for="showCompare">Superposer la comparaison</label><input type="checkbox" id="showCompare" checked /></div>
+      <div class="sidebar-bottom"><div class="live-indicator"><span></span><b id="dataStatus">Connexion aux données…</b></div><p>Visa : photographie 2026<br>Routes aériennes : 2014</p><a href="#methodology">Sources & méthodologie ↗</a></div>
+    </aside>
+
+    <main class="content">
+      <header class="topbar"><div class="breadcrumbs">PROJET INFO-VIS <span>/</span> DASHBOARD INTERACTIF <span>/</span> D3.JS</div><button id="exportBtn" class="outline-button" type="button" title="Exporter les données du passeport sélectionné">↓ <span>Exporter CSV</span></button></header>
+      <section class="page-head" id="atlas"><div class="eyebrow"><span class="eyebrow-line"></span> EXPLORER LES FRONTIÈRES INVISIBLES</div><div class="headline-row"><div><h1>Le monde, <em>sans frontières ?</em></h1><p>Visas, connexions aériennes et mutations géopolitiques : ce que les données racontent de notre liberté de voyager.</p></div><span class="data-pill"><span class="pulse-dot"></span> SOURCES HISTORIQUES & 2026</span></div></section>
+
+      <div id="errorBanner" role="alert" class="error-banner hidden"><strong>Impossible de charger les données.</strong><span id="errorMessage"></span><button id="retryBtn">Réessayer</button></div>
+      <div class="notice"><span class="notice-symbol">ⓘ</span><span><strong>Attention aux périodes :</strong> les visas proviennent d'une matrice 2026 ; les routes OpenFlights décrivent un réseau de 2014. Ce tableau de bord explore une <strong>association descriptive entre sources non contemporaines</strong>, pas une causalité ni une évolution réelle des vols.</span></div>
+
+      <section class="metrics" aria-label="Indicateurs clés">
+        <div class="metric"><span class="metric-label">DESTINATIONS SANS VISA PRÉALABLE <span class="metric-icon">↗</span></span><div class="metric-number" id="mAccessible">—</div><span class="metric-foot" id="mAccessibleSub">Calcul depuis la matrice visa</span><div class="metric-accent mint"></div></div>
+        <div class="metric"><span class="metric-label">VISA À DEMANDER <span class="metric-icon">⊞</span></span><div class="metric-number" id="mRequired">—</div><span class="metric-foot">Visa classique / consulaire</span><div class="metric-accent rose"></div></div>
+        <div class="metric"><span class="metric-label">PAYS RELIÉS EN DIRECT <span class="metric-icon">⌁</span></span><div class="metric-number" id="mConnected">—</div><span class="metric-foot">Routes sortantes recensées en 2014</span><div class="metric-accent sky"></div></div>
+        <div class="metric"><span class="metric-label">LIAISONS ENREGISTRÉES <span class="metric-icon">◌</span></span><div class="metric-number" id="mRoutes">—</div><span class="metric-foot">Lignes OpenFlights, pas nombre de vols</span><div class="metric-accent amber"></div></div>
+      </section>
+
+      <section class="panel map-panel"><div class="panel-head"><div><span class="section-kicker">01 / EXPLORATION GÉOGRAPHIQUE</span><h2>Carte mondiale des accès</h2><p>Survole un pays pour examiner les restrictions et les connexions.</p></div><div class="map-actions"><button type="button" id="zoomOut" aria-label="Dézoomer">−</button><button type="button" id="zoomReset" aria-label="Réinitialiser la carte">⤢</button><button type="button" id="zoomIn" aria-label="Zoomer">+</button></div></div>
+        <div class="map-wrap"><svg id="worldMap" role="img" aria-label="Carte interactive des exigences de visa par pays" viewBox="0 0 1100 560"><text x="550" y="280" text-anchor="middle" fill="#71829a" font-size="16">Chargement des données mondiales…</text></svg><div class="map-corner">◉ <span id="mapSelectedCountry">PASSEPORT FRANÇAIS</span><small>CARTE DES VISAS · 2026</small></div><div class="map-float-info"><span class="map-dot"></span> Traits = connexions historiques 2014</div></div>
+        <div class="map-legend" id="mapLegend"><span class="legend-item"><i style="background:#45c9a7"></i> Sans visa</span><span class="legend-item"><i style="background:#70a9e9"></i> À l'arrivée</span><span class="legend-item"><i style="background:#b39df1"></i> ETA</span><span class="legend-item"><i style="background:#e9b365"></i> E-visa</span><span class="legend-item"><i style="background:#ee7a88"></i> Visa requis</span><span class="legend-item"><i style="background:#9d526c"></i> Interdit</span><span class="legend-item"><i style="background:#34415a"></i> Manquant</span></div>
+      </section>
+
+      <section class="two-col" id="analysis">
+        <article class="panel chart-panel"><div class="panel-head"><div><span class="section-kicker">02 / ANALYSE COMPARATIVE</span><h2>Mobilité vs connectivité</h2><p>Un point représente un pays, deux métriques, deux périodes.</p></div><div class="mini-stat" id="correlationValue">r = —<small>corrélation Pearson</small></div></div><div class="chart-container" id="scatterChart"><p class="placeholder">Calcul du graphique…</p></div><div class="panel-note">Score calculé = accès sans visa, visa à l'arrivée ou ETA. Connectivité = nombre de pays desservis par routes sortantes (2014). Aucune interprétation causale.</div></article>
+        <article class="panel chart-panel"><div class="panel-head"><div><span class="section-kicker">03 / DESTINATIONS</span><h2>Connexions du passeport</h2><p>Principales destinations par nombre d'entrées OpenFlights.</p></div><span class="subtle-chip">2014</span></div><div id="topDestinations" class="destinations-list"><p class="placeholder">Calcul des destinations…</p></div><div class="panel-note">Une entrée peut représenter une compagnie sur une route ; ce n'est ni une fréquence ni un volume de passagers.</div></article>
+      </section>
+
+      <section class="panel matrix-panel" id="matrix"><div class="panel-head"><div><span class="section-kicker">04 / COMPARAISON MULTIPAYS</span><h2>Matrice des exigences de visa</h2><p>Des passeports en lignes, des destinations en colonnes. Clique sur une cellule pour ses détails.</p></div><span class="subtle-chip">MATRICE 2026</span></div><div id="matrixLegend" class="matrix-legend" aria-label="Légende de la matrice"></div><div id="heatmapChart" class="heatmap-container"><p class="placeholder">Préparation de la matrice…</p></div><div class="matrix-footnote"><strong>Lecture :</strong> chaque ligne est un passeport, chaque colonne un pays de destination ; la couleur d'une cellule donne la formalité d'entrée. Les passeports sélectionnés (principal en vert, comparé en violet) apparaissent automatiquement lorsqu'ils sont présents dans la source.</div></section>
+
+      <section class="panel timeline-panel" id="timeline"><div class="panel-head"><div><span class="section-kicker">05 / CONTEXTE GÉOPOLITIQUE</span><h2>Les frontières changent avec l'histoire</h2><p>Événements sourcés pour contextualiser les données — sans inférer un effet statistique.</p></div><span class="subtle-chip amber-label">ÉVÉNEMENTS DOCUMENTÉS</span></div><div class="timeline-header"><div><span class="field-label">EXPLORER LA CHRONOLOGIE JUSQU'EN</span><strong id="yearLabel">2026</strong></div><input type="range" id="yearSlider" min="2020" max="2026" value="2026" step="1" aria-label="Année de la chronologie"></div><div id="timelineChart" class="timeline-plot"></div><div class="timeline-list" id="eventList"></div><p class="timeline-disclaimer">La chronologie affiche les faits datés jusqu'à l'année choisie. <strong>Elle ne fait pas varier la carte des visas (photographie 2026) ni le réseau aérien (2014).</strong> Les événements ne sont pas utilisés pour calculer une causalité.</p></section>
+
+      <section id="methodology" class="methodology"><div><span class="section-kicker">MÉTHODOLOGIE & TRANSPARENCE</span><h2>Une comparaison, pas une prédiction.</h2><p>Le score de mobilité affiché est <strong>calculé depuis les exigences bilatérales</strong> ; ce n'est pas le score officiel Henley. Les nationalités sont rapprochées par codes ISO. Les données d'aéroports et de routes sont reliées par identifiants OpenFlights. La corrélation regroupe des mesures de 2014 et de 2026 : elle sert à explorer une association, pas à en déduire une évolution ou une causalité.</p></div><div class="source-links"><a href="https://github.com/imorte/passport-index-data" target="_blank" rel="noopener noreferrer">Passport Index Data (2026) ↗</a><a href="https://openflights.org/data.php" target="_blank" rel="noopener noreferrer">OpenFlights (routes historiques) ↗</a><a href="https://github.com/datasets/geo-countries" target="_blank" rel="noopener noreferrer">Natural Earth / geo-countries ↗</a><a href="https://d3js.org/" target="_blank" rel="noopener noreferrer">D3.js ↗</a></div></section>
+      <footer>© 2026 BORDERLESS · Projet pédagogique de visualisation d'information · Les exigences de visa doivent toujours être vérifiées auprès des autorités avant un voyage.</footer>
+    </main>
+  </div>
+
+  <div id="tooltip" class="tooltip hidden" role="status" aria-live="polite"></div>
+  <aside class="detail-drawer" id="detailDrawer" aria-label="Détails d'une destination" aria-hidden="true"><button id="closeDrawer" class="drawer-close" type="button" aria-label="Fermer">×</button><span class="section-kicker">DÉTAILS DE LA DESTINATION</span><h2 id="detailName">—</h2><div id="detailContent"></div></aside>
+  <div class="drawer-scrim hidden" id="drawerScrim"></div>
+  <div id="loadingOverlay" class="loading-overlay"><div class="loader-logo">B<span>·</span></div><div class="loading-copy">Chargement des données publiques…</div><div class="loading-line"><i></i></div><small>Visas · Aéroports · Routes · Frontières</small></div>
+</body>
+</html>
